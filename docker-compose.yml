@@ -1,10 +1,21 @@
 version: '3.8'
 
 services:
-  bot:
+  telegram_bot:
     build: .
-    container_name: compressbot
+    container_name: compressbot_telegram
     restart: unless-stopped
+    command: ["python", "bot.py"]
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+
+  discord_bot:
+    build: .
+    container_name: compressbot_discord
+    restart: unless-stopped
+    command: ["python", "discord_bot.py"]
     env_file:
       - .env
     volumes:
